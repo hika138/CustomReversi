@@ -39,6 +39,7 @@ def main():
     cell[int(boardWidth/2-1)][int(boardHeight/2)] = -1
     cell[int((boardWidth/2))][int((boardHeight/2)-1)] = -1
 
+    #ゲームのメインループ
     while (True):
         if (is_finish(cell) or event == -1):
             break
