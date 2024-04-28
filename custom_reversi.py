@@ -1,3 +1,5 @@
+# 思いついた面白そうなルールのリバーシを実装してみた
+
 import os
 import random
 import numpy as np
@@ -19,6 +21,7 @@ def main():
     global turn
     global gamemode
 
+    #ゲームモードの選択
     while True:
         os.system("cls")
         print("ゲームモードは？")
@@ -69,6 +72,7 @@ def auto_input(cell):
         print("Xのターン")
         turn_player = -1
 
+    #置く場所を決める
     for k in range(0, boardHeight*boardWidth*2):
         i = random.randint(0, boardWidth-1)
         j = random.randint(0, boardHeight-1)
@@ -125,6 +129,7 @@ def shift_cell(cell,shift_dir): #shift_cdirは左が0、右が1、上が2、下�
     return
 
 
+#石の数を数える関数
 def count_stones(cell):
     global O_disc
     global X_disc
@@ -270,7 +275,6 @@ def draw_board(cell, Event):
             else:
                 print('-', end=' ')
         print()
-
 
 if __name__=="__main__":
     main()
