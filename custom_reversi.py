@@ -1,4 +1,4 @@
-# 思いついた面白そうなルールのリバーシを実装してみた
+#思いついた面白そうなルールのリバーシを実装してみた
 
 import os
 import random
@@ -153,6 +153,7 @@ def is_finish(cell):
     for i in range(boardWidth):
         for j in range(boardHeight):
             if cell[i][j] == 0:
+                #どちらか一方でも駒を置ける場所があればゲームは続行
                 return False
     event = -1
     return True
@@ -195,16 +196,19 @@ def place_and_flip(cell, x, y, turn_player):
             if i == 0 and j == 0:
                 continue
             r, c = x + i, y + j
+            # 位置をずらしながら、同じ色の駒が出てくるまで探索する
             if gamemode == 1:
                 r = r % boardWidth
                 c = c % boardHeight
             flip_list = []
+            # ひっくり返す駒のリストを作成
             while 0 <= r < boardWidth and 0 <= c < boardHeight and cell[r][c] == -turn_player:
                 flip_list.append((r, c))
                 r, c = r + i, c + j
                 if gamemode == 1:
                     r = r % boardWidth
                     c = c % boardHeight
+            # 探索中に同じ色の駒が出た場合は、それまでの間に相手の駒があったということなので、ひっくり返す
             if 0 <= r < boardWidth and 0 <= c < boardHeight and cell[r][c] == turn_player:
                 for r_flip, c_flip in flip_list:
                     cell[r_flip][c_flip] = turn_player
